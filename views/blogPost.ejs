@@ -1,0 +1,120 @@
+<%- include('header') %>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">BLOG POST</h6>
+                    <form method="post" action="/blogpostData" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Title</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Description</label>
+                            <input type="text" name="description" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input type="date" name="date" class="form-control" id="exampleInputPassword1">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Author</label>
+                            <input type="text" name="author" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Image</label>
+                            <input type="file" name="image" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">ADD BLOG</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class=" col-xl-12">
+                <div class="col-12">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">View Category</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Author</th>
+                                        <th scope="col">IMAGE</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     
+                                    <% blogPostdata.map((val,index)=>{%>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= index+1%>
+                                            </th>
+                                            <td>
+                                                <%=val.title%>
+                                            </td>
+                                            <td>
+                                                <%=val.description%>
+                                            </td>
+                                            <td>
+                                                <%=val.date%>
+                                            </td>
+                                            <td>
+                                                <%=val.author%>
+                                            </td>
+                                            <td>
+                                                <img src="<%=val.image%>" alt="img" width="100">
+                                            </td>
+                                            <% if(val.status==1 ){%>
+                                              
+                                                <td>
+                                                    <a href="/blogpostactive/<%=val.id%>"type="button"
+                                                        class="btn btn-success">Active</a>
+                                                </td>
+                                                <% }else{%>
+                                                    <td>
+                                                        <a href="/blogpostdeactive/<%=val.id%>" type="button"
+                                                            class="btn btn-warning">Deactive</a>
+                                                    </td>
+                                               <% }%>
+                                                   
+
+                                                    <td><a href="/blogpostdeletData/<%=val.id%>">Delete</a> || <a
+                                                            href="/blogposteditData/<%=val.id%>">Update</a></td>
+                                                    <%})%>
+                                        </tr>
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') %>

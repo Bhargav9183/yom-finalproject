@@ -1,0 +1,98 @@
+<%- include('header') %>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">ADD SLIDER</h6>
+                    <form method="post" action="/categoryData" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Slider Title</label>
+                            <input type="text" name="title" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Sub Title</label>
+                            <input type="text" name="subtitle" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Slider Image</label>
+                            <input type="file" name="image" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">ADD SLIDER</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class=" col-xl-12">
+                <div class="col-12">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">View Category</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Slider Title</th>
+                                        <th scope="col">Sub Title</th>
+                                        <th scope="col">IMAGE</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <% data.map((val,index)=>{%>
+                                        <tr>
+                                            <th scope="row">
+                                                <%= index+1%>
+                                            </th>
+                                            <td>
+                                                <%=val.title%>
+                                            </td>
+                                            <td>
+                                                <%=val.subtitle%>
+                                            </td>
+                                            <td>
+                                                <img src="<%=val.image%>" alt="img" width="100">
+                                            </td>
+                                            <% if(val.status==1 ){%>
+                                              
+                                                <td>
+                                                    <a href="/active/<%=val.id%>"type="button"
+                                                        class="btn btn-success">Active</a>
+                                                </td>
+                                                <% }else{%>
+                                                    <td>
+                                                        <a href="/deactive/<%=val.id%>" type="button"
+                                                            class="btn btn-warning">Deactive</a>
+                                                    </td>
+                                               <% }%>
+                                                   
+
+                                                    <td><a href="/deletData/<%=val.id%>">Delete</a> || <a
+                                                            href="/editData/<%=val.id%>">Update</a></td>
+                                                    <%})%>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('footer') %>
